@@ -77,6 +77,11 @@ too - it's ignored in the kickstart repo to make maintenance easier, but it's
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
+```sh
+git clone https://github.com/foskaos/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
+
 </details>
 
 <details><summary> Windows </summary>
