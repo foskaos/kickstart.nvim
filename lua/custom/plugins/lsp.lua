@@ -123,7 +123,28 @@ return {
     local servers = {
       -- clangd = {},
       gopls = {},
-      pyright = {},
+      pyright = {
+        before_init = function(_, config)
+          -- Auto-detect .venv in the project root for uv
+          local venv = vim.fs.find('.venv', { path = config.root_dir, upward = false, type = 'directory' })[1]
+          if venv then
+            config.settings.python.pythonPath = venv .. '/bin/python'
+          end
+        end,
+        settings = {
+          pyright = {
+            -- Let ruff handle import organization
+            disableOrganizeImports = true,
+          },
+          python = {},
+        },
+      },
+      ruff = {
+        on_attach = function(client)
+          -- Disable hover in favor of pyright
+          client.server_capabilities.hoverProvider = false
+        end,
+      },
       -- rust_analyzer = {},
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
